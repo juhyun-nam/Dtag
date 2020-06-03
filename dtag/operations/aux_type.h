@@ -8,7 +8,7 @@
 namespace dtag {
 namespace op {
 
-enum class AuxType { kNONE };
+enum class AuxType { kNONE, kALL };
 
 }  // namespace op
 }  // namespace dtag

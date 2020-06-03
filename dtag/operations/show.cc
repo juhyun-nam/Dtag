@@ -4,12 +4,15 @@
 
 #include "dtag/operations/show.h"
 
+#include "dtag/tag_manager.h"
+
 namespace dtag {
 namespace op {
 
 Show::Show(AuxType aux) : aux_(aux) {}
 std::string Show::Process(const arg_t&) {
-  return "tag1 tag2";
+  auto& tm = TagManager::GetInstance();
+  return tm.GetTag();
 }
 
 }  // namespace op
