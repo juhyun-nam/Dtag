@@ -6,8 +6,12 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#include_directories(include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_subdirectory(src)
+set(DTAG_SOURCES
+    dtag/dtag.cc
+    )
+
+add_executable(dtag ${DTAG_SOURCES})
 enable_testing()
 #add_subdirectory(tests)
