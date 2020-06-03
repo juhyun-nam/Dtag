@@ -1,16 +1,16 @@
-/// \file option_parser.h
+/// \file parser.h
 /// \brief main's option argument parser
 /// \author juhyun-nam
 
 #ifndef OPTION_PARSER_H_
 #define OPTION_PARSER_H_
 
-namespace dtag {
+#include "dtag/option/argument.h"
 
+namespace dtag {
 namespace option {
 
-class OptionParser {};
-
+Argument Parse(int argc, char** argv);
 }  // namespace option
 }  // namespace dtag
 
