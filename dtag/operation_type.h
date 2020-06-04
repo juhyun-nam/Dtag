@@ -8,16 +8,7 @@
 namespace dtag {
 namespace op {
 
-enum OperationType {
-  kNONE,
-  kADD,
-  kCLEAR,
-  kHELP,
-  kSEARCH,
-  kSHOW,
-  kREMOVE,
-  kMAX
-};
+enum OperationType { kNONE, kADD, kCLEAR, kHELP, kREMOVE, kSEARCH, kSHOW, kMAX };
 
 }  // namespace op
 }  // namespace dtag

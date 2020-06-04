@@ -2,28 +2,34 @@
 /// \brief dtag main
 /// \author juhyun-nam
 
-#include <unistd.h>
-
 #include <array>
+#include <cassert>
 #include <string>
 
+#include "dtag/aux_type.h"
 #include "dtag/operation_type.h"
+#include "dtag/operations/add.h"
+#include "dtag/operations/clear.h"
+#include "dtag/operations/help.h"
+#include "dtag/operations/remove.h"
+#include "dtag/operations/search.h"
+#include "dtag/operations/show.h"
 #include "dtag/option/argument.h"
 #include "dtag/option/parser.h"
-#include "dtag/tag_manager.h"
 
 namespace {
-using dtag::TagManager;
-std::array<void (TagManager::*)(const std::string&),
-           dtag::op::OperationType::kMAX>
-    fn_array = {&TagManager::None,    &TagManager::ShowTag,
-                &TagManager::ShowTag, &TagManager::ShowTag,
-                &TagManager::ShowTag, &TagManager::ShowTag,
-                &TagManager::AddTag};
+
+using op_fn_t = void (*)(const std::string&, dtag::op::AuxType);
+void None(const std::string&, dtag::op::AuxType) { assert(false); }
+
+std::array<op_fn_t, dtag::op::OperationType::kMAX> fn_array = {
+    &None,           &dtag::op::Add,     &dtag::op::Clear,
+    &dtag::op::Help, &dtag::op::Remove, &dtag::op::Search,
+    &dtag::op::Show};
+
 }  // namespace
 int main(int argc, char** argv) {
   auto arg = dtag::option::Parse(argc, argv);
-  TagManager tm{};
-  (tm.*(fn_array[arg.op]))(arg.input);
+  (*(fn_array[arg.op]))(arg.input, arg.aux);
   return 0;
 }

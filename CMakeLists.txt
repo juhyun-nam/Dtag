@@ -10,9 +10,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 
 set(DTAG_SOURCES
+    dtag/components/tag_reader.cc
     dtag/dtag.cc
+    dtag/operations/help.cc
+    dtag/operations/search.cc
+    dtag/operations/show.cc
     dtag/option/parser.cc
-    dtag/tag_manager.cc
     )
 
 add_executable(dtag ${DTAG_SOURCES})
