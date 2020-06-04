@@ -4,14 +4,26 @@
 
 #include <unistd.h>
 
-#include <iostream>
+#include <array>
+#include <string>
 
-#include "dtag/operations/op_factory.h"
+#include "dtag/operation_type.h"
+#include "dtag/option/argument.h"
 #include "dtag/option/parser.h"
+#include "dtag/tag_manager.h"
 
+namespace {
+using dtag::TagManager;
+std::array<void (TagManager::*)(const std::string&),
+           dtag::op::OperationType::kMAX>
+    fn_array = {&TagManager::None,    &TagManager::ShowTag,
+                &TagManager::ShowTag, &TagManager::ShowTag,
+                &TagManager::ShowTag, &TagManager::ShowTag,
+                &TagManager::AddTag};
+}  // namespace
 int main(int argc, char** argv) {
-  auto argument = dtag::option::Parse(argc, argv);
-  auto op = dtag::op::GetOperation(argument.op, argument.aux);
-  std::cout << op->Process(argument.input) << std::endl;
+  auto arg = dtag::option::Parse(argc, argv);
+  TagManager tm{};
+  (tm.*(fn_array[arg.op]))(arg.input);
   return 0;
 }

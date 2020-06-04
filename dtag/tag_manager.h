@@ -5,10 +5,9 @@
 #ifndef DTAG_TAG_MANAGER_H_
 #define DTAG_TAG_MANAGER_H_
 
+#include <cassert>
 #include <fstream>
 #include <string>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 
 #include "dtag/env.h"
 #include "dtag/tag.h"
@@ -17,14 +16,14 @@ namespace dtag {
 
 class TagManager {
  public:
-  static TagManager& GetInstance();
+  TagManager();
 
-  std::string GetTag();
-  std::string GetTag(std::string path);
+  void None(const std::string& path) { assert(false); }
+  void ShowTag(const std::string&);
+  void AddTag(const std::string&);
 
  private:
-  TagManager();
-  std::fstream fs_;
+  std::ifstream ifs_;
   // boost::archive::text_oarchive oa_;
   // boost::archive::text_iarchive ia_;
 };

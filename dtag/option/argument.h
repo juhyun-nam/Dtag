@@ -8,8 +8,8 @@
 #include <string>
 #include <vector>
 
-#include "dtag/operations/aux_type.h"
-#include "dtag/operations/operation_type.h"
+#include "dtag/aux_type.h"
+#include "dtag/operation_type.h"
 
 namespace dtag {
 namespace option {
@@ -17,7 +17,7 @@ namespace option {
 struct Argument {
   op::OperationType op;
   op::AuxType aux;
-  std::vector<std::string> input;
+  std::string input;
 };
 
 }  // namespace option
