@@ -25,6 +25,16 @@ bool TagReader::ReadLine() {
   read_success = read_success && std::getline(ifs_, tag_buf_);
   return read_success;
 }
+std::ifstream::pos_type TagReader::GetTagPos(const std::string& path) {
+  std::ifstream::pos_type pos{};
+  while (std::getline(ifs_, path_buf_)) {
+    if (path == path_buf_) {
+      pos = ifs_.tellg();
+    }
+    std::getline(ifs_, tag_buf_);
+  }
+  return pos;
+}
 const std::string& TagReader::path() const { return path_buf_; }
 const std::string& TagReader::tag() const { return tag_buf_; }
 

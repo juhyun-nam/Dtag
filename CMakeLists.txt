@@ -11,6 +11,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(DTAG_SOURCES
     dtag/components/tag_reader.cc
+    dtag/components/tag_writer.cc
     dtag/dtag.cc
     dtag/operations/help.cc
     dtag/operations/search.cc

@@ -6,11 +6,23 @@
 #define DTAG_COMPONENTS_TAG_WRITER_H_
 
 #include <fstream>
+#include <string>
+
+namespace dtag {
+namespace component {
 
 class TagWriter {
  public:
-  TagWriter() = default;
+  TagWriter();
+
+  void SetPos(std::ofstream::pos_type);
+  void Write(const std::string& tags);
+
  private:
-  std::ofstream ifs_;
+  std::ofstream ofs_;
 };
+
+}  // namespace component
+}  // namespace dtag
+
 #endif  // DTAG_COMPONENTS_TAG_WRITER_H_
