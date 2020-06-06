@@ -4,19 +4,39 @@
 
 #include "dtag/components/tag_writer.h"
 
+#include <cstdio>
 #include <fstream>
+#include <iostream>
 
 #include "dtag/env.h"
 
 namespace dtag {
 namespace component {
-TagWriter::TagWriter() : ofs_(Env::TagFile(), std::ios::out) {
+/// temp file을 만들고 마음껏 사용한다음 destructor에서 바꿔치기
+TagWriter::TagWriter() : ofs_(Env::TagTempFile(), std::ios::trunc) {
   if (!ofs_) {
-    throw "CAN NOT OPEN TAG FILE";
+    throw "CAN NOT OPEN TAG TEMPORARY FILE";
   }
 }
-void TagWriter::SetPos(std::ofstream::pos_type pos) { ofs_.seekp(pos); }
-void TagWriter::Write(const std::string& tags) { ofs_.write(tags.data(), tags.length()); }
+TagWriter::~TagWriter() {
+  ofs_.close();
+  if (std::rename(Env::TagTempFile(), Env::TagFile())) {
+    std::cerr << "CAN NOT RENAME TAG FILE" << std::endl;
+  }
+}
+void TagWriter::SetPos(std::ofstream::pos_type pos) {
+  ofs_.seekp(pos);
+}
+void TagWriter::Write(const std::string& str) {
+  ofs_.write(str.data(), str.length());
+}
+void TagWriter::WriteLine(const std::string& str) {
+  Write(str);
+  Put('\n');
+}
+void TagWriter::Put(char c) {
+  ofs_.put(c);
+}
 
 }  // namespace component
 }  // namespace dtag

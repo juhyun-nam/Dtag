@@ -17,6 +17,7 @@ class Env {
   Env() = default;
 
   static const char* TagFile() { return "tag"; }
+  static const char* TagTempFile() { return "tag.swp"; }
   static const std::size_t kMaxPathLength = 128;
   static const std::size_t kMaxTagLength = 128;
   static const std::size_t kMaxLineLength = kMaxPathLength + kMaxTagLength;

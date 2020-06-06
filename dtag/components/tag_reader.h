@@ -16,9 +16,10 @@ namespace component {
 class TagReader {
  public:
   TagReader();
+  virtual ~TagReader();
 
   bool ReadLine();
-  std::ifstream::pos_type GetTagPos(const std::string& path);
+  std::ifstream::pos_type GetPathPos(const std::string& path);
   const std::string& path() const;
   const std::string& tag() const;
 

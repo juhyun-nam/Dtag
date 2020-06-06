@@ -23,17 +23,25 @@ Argument Parse(int argc, char** argv) {
     return Argument{op, aux, input};
   }
   auto arg = argv[1];
-  if (0 == std::strcmp(arg, "help")) {
-    op = OperationType::kHELP;
-  } else if (0 == std::strcmp(arg, "show")) {
+  if (0 == std::strcmp(arg, "show")) {
     op = OperationType::kSHOW;
+  } else if (0 == std::strcmp(arg, "clear")) {
+    op = OperationType::kCLEAR;
+  } else if (0 == std::strcmp(arg, "remove")) {
+    op = OperationType::kREMOVE;
+  } else if (0 == std::strcmp(arg, "add")) {
+    op = OperationType::kADD;
   } else if (0 == std::strcmp(arg, "search")) {
     op = OperationType::kSEARCH;
-    if (3 != argc) {
+    if (3 != argc)
       op = OperationType::kHELP;
-    } else {
-      input = argv[2];
-    }
+  } else {
+    op = OperationType::kHELP;
+    return Argument{op, aux, input};
+  }
+
+  if (3 >= argc) {
+    input = argv[2];
   }
 
   return Argument{op, aux, input};

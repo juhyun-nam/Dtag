@@ -17,7 +17,7 @@ void Search(const std::string& tag, AuxType) {
   bool match_found = false;
   while (reader.ReadLine()) {
     if (std::string::npos != reader.tag().find(tag)) {
-      std::cout << reader.path() << '\n' << reader.tag() << std::endl;
+      std::cout << reader.path() << '\n' << "  " << reader.tag() << std::endl;
       match_found = true;
     }
   }

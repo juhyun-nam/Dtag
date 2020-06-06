@@ -2,12 +2,13 @@
 /// \brief operation show
 /// \author juhyun-nam
 
-#include <cassert>
+#include "dtag/operations/show.h"
+
 #include <iostream>
 #include <string>
 
-#include "dtag/aux_type.h"
 #include "dtag/components/tag_reader.h"
+#include "dtag/env.h"
 
 namespace dtag {
 namespace op {
@@ -22,7 +23,10 @@ void Show(const std::string&, AuxType) {
       break;
     }
   }
-  assert(match_found);
+  if (!match_found) {
+    std::cerr << "TAG NOT FOUND IN THIS DIRECTORY" << std::endl;
+    return;
+  }
   std::cout << reader.tag() << std::endl;
 }
 

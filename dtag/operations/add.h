@@ -12,7 +12,7 @@
 namespace dtag {
 namespace op {
 
-void Add(const std::string&, AuxType) {}
+void Add(const std::string&, AuxType);
 
 }  // namespace op
 }  // namespace dtag

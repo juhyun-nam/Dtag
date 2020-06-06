@@ -13,7 +13,9 @@ set(DTAG_SOURCES
     dtag/components/tag_reader.cc
     dtag/components/tag_writer.cc
     dtag/dtag.cc
+    dtag/operations/add.cc
     dtag/operations/help.cc
+    dtag/operations/clear.cc
     dtag/operations/search.cc
     dtag/operations/show.cc
     dtag/option/parser.cc

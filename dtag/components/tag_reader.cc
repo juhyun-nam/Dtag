@@ -16,6 +16,9 @@ TagReader::TagReader() : ifs_(Env::TagFile()) {
   path_buf_.reserve(Env::kMaxPathLength);
   tag_buf_.reserve(Env::kMaxTagLength);
 }
+TagReader::~TagReader() {
+  ifs_.close();
+}
 
 bool TagReader::ReadLine() {
   auto path = Env::CurrentDirectory();
@@ -25,18 +28,25 @@ bool TagReader::ReadLine() {
   read_success = read_success && std::getline(ifs_, tag_buf_);
   return read_success;
 }
-std::ifstream::pos_type TagReader::GetTagPos(const std::string& path) {
-  std::ifstream::pos_type pos{};
+std::ifstream::pos_type TagReader::GetPathPos(const std::string& path) {
+  std::ifstream::pos_type pos(-1);
+  ifs_.seekg(std::ifstream::pos_type(0));
+  bool found = false;
   while (std::getline(ifs_, path_buf_)) {
+    std::getline(ifs_, tag_buf_);
     if (path == path_buf_) {
       pos = ifs_.tellg();
+      break;
     }
-    std::getline(ifs_, tag_buf_);
   }
   return pos;
 }
-const std::string& TagReader::path() const { return path_buf_; }
-const std::string& TagReader::tag() const { return tag_buf_; }
+const std::string& TagReader::path() const {
+  return path_buf_;
+}
+const std::string& TagReader::tag() const {
+  return tag_buf_;
+}
 
 }  // namespace component
 }  // namespace dtag

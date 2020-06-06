@@ -14,9 +14,12 @@ namespace component {
 class TagWriter {
  public:
   TagWriter();
+  virtual ~TagWriter();
 
   void SetPos(std::ofstream::pos_type);
-  void Write(const std::string& tags);
+  void Write(const std::string& str);
+  void WriteLine(const std::string& str);
+  void Put(char);
 
  private:
   std::ofstream ofs_;
