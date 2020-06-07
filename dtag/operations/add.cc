@@ -14,7 +14,7 @@ namespace dtag {
 namespace op {
 
 void Add(const std::string& tag, AuxType) {
-  auto path = Env::CurrentDirectory();
+  std::string path = Env::CurrentDirectory();
   component::TagReader reader{};
   component::TagWriter writer{};
   bool match_found = false;
@@ -23,7 +23,10 @@ void Add(const std::string& tag, AuxType) {
     writer.WriteLine(reader.path());
     if (path == reader.path()) {
       match_found = true;
-      writer.WriteLine(reader.tag() + tag);
+      auto pos = reader.tag().find(tag);
+      if (std::string::npos == pos) {
+        writer.WriteLine(reader.tag() + tag + " ");
+      }
     } else {
       writer.WriteLine(reader.tag());
     }
@@ -31,7 +34,7 @@ void Add(const std::string& tag, AuxType) {
 
   if (!match_found) {
     writer.WriteLine(path);
-    writer.WriteLine(tag);
+    writer.WriteLine(" " + tag + " ");
   }
 
   std::cout << "tag: " << tag << " added in path: " << path << std::endl;

@@ -20,7 +20,7 @@ TagWriter::TagWriter() : ofs_(Env::TagTempFile(), std::ios::trunc) {
 }
 TagWriter::~TagWriter() {
   ofs_.close();
-  if (std::rename(Env::TagTempFile(), Env::TagFile())) {
+  if (std::rename(Env::TagTempFile().data(), Env::TagFile().data())) {
     std::cerr << "CAN NOT RENAME TAG FILE" << std::endl;
   }
 }

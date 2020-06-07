@@ -14,7 +14,7 @@ namespace dtag {
 namespace op {
 
 void Clear(const std::string&, AuxType) {
-  auto path = Env::CurrentDirectory();
+  std::string path = Env::CurrentDirectory();
   component::TagReader reader{};
   component::TagWriter writer{};
   bool match_found = false;

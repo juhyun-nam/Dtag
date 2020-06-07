@@ -40,7 +40,7 @@ Argument Parse(int argc, char** argv) {
     return Argument{op, aux, input};
   }
 
-  if (3 >= argc) {
+  if (3 <= argc) {
     input = argv[2];
   }
 

@@ -7,13 +7,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(DTAG_BUILD_TESTING "enalbe testing for dtag" ON)
-set(EXTRA_TARGET_LINK_LIBRARIES)
-
 
 set(DTAG_SOURCES
     dtag/components/tag_reader.cc
     dtag/components/tag_writer.cc
     dtag/dtag.cc
+    dtag/env.cc
     dtag/operations/add.cc
     dtag/operations/help.cc
     dtag/operations/clear.cc
@@ -25,10 +24,9 @@ set(DTAG_SOURCES
 
 add_executable(dtag ${DTAG_SOURCES})
 target_include_directories(dtag PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_compile_options(dtag PRIVATE -Werror -Wall)
 
 if (DTAG_BUILD_TESTING)
-  include(Ctest)
+  include(CTest)
   enable_testing()
   target_compile_options(dtag PRIVATE -O0 -g --coverage)
   target_link_libraries(dtag PRIVATE --coverage)
@@ -43,7 +41,7 @@ if (DTAG_BUILD_TESTING)
   foreach(target ${TEST_TARGETS})
     add_executable(${target} dtag/tests/${target}.cc)
     target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-    target_compile_options(${target} PRIVATE -Werror -Wall -O0 -g --coverage)
+    target_compile_options(${target} PRIVATE -Werror -Wall -Wextra -O0 -g --coverage)
     target_link_libraries(${target} PRIVATE doctest --coverage)
     add_test(NAME ${target} COMMAND ${target} --success)
   endforeach(target)

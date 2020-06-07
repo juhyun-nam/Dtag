@@ -14,7 +14,7 @@ namespace dtag {
 namespace op {
 
 void Show(const std::string&, AuxType) {
-  auto path = Env::CurrentDirectory();
+  std::string path = Env::CurrentDirectory();
   component::TagReader reader{};
   bool match_found = false;
   while (reader.ReadLine()) {

@@ -15,24 +15,24 @@ namespace dtag {
 namespace op {
 
 void Remove(const std::string& tag, AuxType) {
-  auto path = Env::CurrentDirectory();
+  std::string path = Env::CurrentDirectory();
   component::TagReader reader{};
   component::TagWriter writer{};
   bool match_found = false;
 
   while (reader.ReadLine()) {
+    writer.WriteLine(reader.path());
     if (path == reader.path()) {
       auto file_tag = reader.tag();
-      auto pos = file_tag.find(tag);
+      auto pos = file_tag.find(" " + tag + " ");
       if (std::string::npos != pos) {
         match_found = true;
         file_tag.erase(pos, pos + tag.length());
+        writer.WriteLine(file_tag);
+        break;
       }
-
-    } else {
-      writer.WriteLine(reader.path());
-      writer.WriteLine(reader.tag());
     }
+    writer.WriteLine(reader.tag());
   }
 
   if (match_found) {
