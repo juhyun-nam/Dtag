@@ -1,0 +1,10 @@
+Source: dtag
+Section: devel
+Priority: optional
+Maintainer: Juhyun Nam <nothinis@naver.com>
+Build-Depends: build-essential, cmake, debhelper (>= 9)
+
+Package: dtag
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: simple and lightweight directory tagging package
