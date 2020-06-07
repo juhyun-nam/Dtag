@@ -22,7 +22,6 @@ TagReader::~TagReader() {
 
 bool TagReader::ReadLine() {
   auto path = Env::CurrentDirectory();
-  auto len = path.length();
   bool read_success = true;
   read_success = read_success && std::getline(ifs_, path_buf_);
   read_success = read_success && std::getline(ifs_, tag_buf_);
@@ -31,7 +30,6 @@ bool TagReader::ReadLine() {
 std::ifstream::pos_type TagReader::GetPathPos(const std::string& path) {
   std::ifstream::pos_type pos(-1);
   ifs_.seekg(std::ifstream::pos_type(0));
-  bool found = false;
   while (std::getline(ifs_, path_buf_)) {
     std::getline(ifs_, tag_buf_);
     if (path == path_buf_) {

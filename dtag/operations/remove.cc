@@ -4,6 +4,7 @@
 
 #include "dtag/operations/remove.h"
 
+#include <algorithm>
 #include <iostream>
 
 #include "dtag/components/tag_reader.h"
@@ -21,9 +22,12 @@ void Remove(const std::string& tag, AuxType) {
 
   while (reader.ReadLine()) {
     if (path == reader.path()) {
-      match_found = true;
       auto file_tag = reader.tag();
-      std::find(file_tag.begin(), file_tag.end(), tag);
+      auto pos = file_tag.find(tag);
+      if (std::string::npos != pos) {
+        match_found = true;
+        file_tag.erase(pos, pos + tag.length());
+      }
 
     } else {
       writer.WriteLine(reader.path());
