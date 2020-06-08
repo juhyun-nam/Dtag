@@ -1,7 +1,4 @@
 /build
-debian/.debhelper
-debian/dtag
-debian/dtag.*
 # Prerequisites
 *.d
 
