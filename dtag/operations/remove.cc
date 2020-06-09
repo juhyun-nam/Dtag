@@ -16,14 +16,18 @@ namespace op {
 
 void Remove(const std::string& tag, AuxType) {
   std::string path = Env::CurrentDirectory();
-  component::TagReader reader{};
-  component::TagWriter writer{};
+  component::TagReader reader(Env::TagFile());
+  component::TagWriter writer(Env::TagTempFile());
   bool match_found = false;
 
   while (reader.ReadLine()) {
-    writer.WriteLine(reader.path());
     if (path == reader.path()) {
       auto file_tag = reader.tag();
+      /// tag 전체와 같은 경우
+      if (file_tag == " " + tag + " ") {
+        break;
+      }
+      writer.WriteLine(reader.path());
       auto pos = file_tag.find(" " + tag + " ");
       if (std::string::npos != pos) {
         match_found = true;
@@ -40,6 +44,10 @@ void Remove(const std::string& tag, AuxType) {
   } else {
     std::cerr << "tag of path: " << path << " does not exist" << std::endl;
   }
+
+  reader.Close();
+  writer.Close();
+  Env::OverwriteTagFile();
 }
 
 }  // namespace op

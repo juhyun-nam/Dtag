@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 
+#include "dtag/aux_type.h"
 #include "dtag/components/tag_reader.h"
 #include "dtag/env.h"
 
@@ -15,7 +16,7 @@ namespace op {
 
 void Show(const std::string&, AuxType) {
   std::string path = Env::CurrentDirectory();
-  component::TagReader reader{};
+  component::TagReader reader(Env::TagFile());
   bool match_found = false;
   while (reader.ReadLine()) {
     if (path == reader.path()) {

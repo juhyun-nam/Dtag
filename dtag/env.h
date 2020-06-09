@@ -18,9 +18,12 @@ class Env {
 
   static const std::string& TagFile() { return kTagFile; }
   static const std::string& TagTempFile() { return kTagTempFile; }
+  static void OverwriteTagFile();
+  static const std::string& RecentFile() { return kRecentFile; }
   static const std::string& CurrentDirectory() { return kCurrentDir; }
   static const std::string kTagFile;
   static const std::string kTagTempFile;
+  static const std::string kRecentFile;
   static const std::string kCurrentDir;
   static const std::size_t kMaxPathLength = 128;
   static const std::size_t kMaxTagLength = 128;

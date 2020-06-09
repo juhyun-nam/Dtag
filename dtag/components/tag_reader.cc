@@ -4,19 +4,26 @@
 
 #include "dtag/components/tag_reader.h"
 
+#include <stdexcept>
+
 #include "dtag/env.h"
 
 namespace dtag {
 namespace component {
 
-TagReader::TagReader() : ifs_(Env::TagFile()) {
+TagReader::TagReader(const std::string& tag_file) : ifs_(tag_file) {
   if (!ifs_) {
-    throw "CAN NOT OPEN TAG FILE";
+    throw std::runtime_error("CAN NOT OPEN TAG FILE");
   }
   path_buf_.reserve(Env::kMaxPathLength);
   tag_buf_.reserve(Env::kMaxTagLength);
 }
 TagReader::~TagReader() {
+  if (ifs_.is_open()) {
+    ifs_.close();
+  }
+}
+void TagReader::Close() {
   ifs_.close();
 }
 

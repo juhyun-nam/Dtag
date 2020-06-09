@@ -8,12 +8,13 @@
 
 #include "dtag/aux_type.h"
 #include "dtag/components/tag_reader.h"
+#include "dtag/env.h"
 
 namespace dtag {
 namespace op {
 
 void Search(const std::string& tag, AuxType) {
-  component::TagReader reader{};
+  component::TagReader reader(Env::TagFile());
   bool match_found = false;
   while (reader.ReadLine()) {
     if (std::string::npos != reader.tag().find(tag)) {

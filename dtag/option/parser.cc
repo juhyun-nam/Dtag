@@ -29,6 +29,8 @@ Argument Parse(int argc, char** argv) {
     op = OperationType::kCLEAR;
   } else if (0 == std::strcmp(arg, "remove")) {
     op = OperationType::kREMOVE;
+  } else if (0 == std::strcmp(arg, "recent")) {
+    op = OperationType::kRECENT;
   } else if (0 == std::strcmp(arg, "add")) {
     op = OperationType::kADD;
   } else if (0 == std::strcmp(arg, "search")) {

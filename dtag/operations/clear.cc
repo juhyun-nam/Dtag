@@ -15,8 +15,8 @@ namespace op {
 
 void Clear(const std::string&, AuxType) {
   std::string path = Env::CurrentDirectory();
-  component::TagReader reader{};
-  component::TagWriter writer{};
+  component::TagReader reader(Env::TagFile());
+  component::TagWriter writer(Env::TagTempFile());
   bool match_found = false;
 
   while (reader.ReadLine()) {
@@ -33,6 +33,10 @@ void Clear(const std::string&, AuxType) {
   } else {
     std::cerr << "tag of path: " << path << " does not exist" << std::endl;
   }
+
+  reader.Close();
+  writer.Close();
+  Env::OverwriteTagFile();
 }
 
 }  // namespace op

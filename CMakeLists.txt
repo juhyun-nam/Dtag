@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(DTAG_BUILD_TESTING "enalbe testing for dtag" ON)
 
 set(DTAG_SOURCES
+    dtag/components/recent_writer.cc
     dtag/components/tag_reader.cc
     dtag/components/tag_writer.cc
     dtag/dtag.cc
@@ -16,6 +17,7 @@ set(DTAG_SOURCES
     dtag/operations/add.cc
     dtag/operations/help.cc
     dtag/operations/clear.cc
+    dtag/operations/recent.cc
     dtag/operations/remove.cc
     dtag/operations/search.cc
     dtag/operations/show.cc

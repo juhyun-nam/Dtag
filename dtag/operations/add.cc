@@ -6,6 +6,7 @@
 
 #include <iostream>
 
+#include "dtag/components/recent_writer.h"
 #include "dtag/components/tag_reader.h"
 #include "dtag/components/tag_writer.h"
 #include "dtag/env.h"
@@ -15,13 +16,15 @@ namespace op {
 
 void Add(const std::string& tag, AuxType) {
   std::string path = Env::CurrentDirectory();
-  component::TagReader reader{};
-  component::TagWriter writer{};
+  component::TagReader reader(Env::TagFile());
+  component::TagWriter writer(Env::TagTempFile());
+  component::RecentWriter recent(Env::RecentFile());
   bool match_found = false;
 
   while (reader.ReadLine()) {
     writer.WriteLine(reader.path());
     if (path == reader.path()) {
+      recent.Update(path);
       match_found = true;
       auto pos = reader.tag().find(tag);
       if (std::string::npos == pos) {
@@ -35,9 +38,14 @@ void Add(const std::string& tag, AuxType) {
   if (!match_found) {
     writer.WriteLine(path);
     writer.WriteLine(" " + tag + " ");
+    recent.Update(path);
   }
 
   std::cout << "tag: " << tag << " added in path: " << path << std::endl;
+
+  reader.Close();
+  writer.Close();
+  Env::OverwriteTagFile();
 }
 
 }  // namespace op

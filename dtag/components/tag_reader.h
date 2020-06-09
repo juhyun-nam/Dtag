@@ -8,20 +8,19 @@
 #include <fstream>
 #include <string>
 
-#include "dtag/env.h"
-
 namespace dtag {
 namespace component {
 
 class TagReader {
  public:
-  TagReader();
+  explicit TagReader(const std::string& tag_file);
   virtual ~TagReader();
 
   bool ReadLine();
   std::ifstream::pos_type GetPathPos(const std::string& path);
   const std::string& path() const;
   const std::string& tag() const;
+  void Close();
 
  private:
   std::ifstream ifs_;

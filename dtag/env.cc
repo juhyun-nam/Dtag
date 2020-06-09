@@ -4,13 +4,22 @@
 
 #include "dtag/env.h"
 
+#include <cstdio>
 #include <cstdlib>
+#include <stdexcept>
 
 namespace dtag {
 const std::string Env::kTagFile =
     std::string(std::getenv("HOME")) + "/.local/share/dtag/tag";
 const std::string Env::kTagTempFile =
     std::string(std::getenv("HOME")) + "/.local/share/dtag/tag.swp";
+const std::string Env::kRecentFile =
+    std::string(std::getenv("HOME")) + "/.local/share/dtag/recent";
 const std::string Env::kCurrentDir = std::string(get_current_dir_name());
+void Env::OverwriteTagFile() {
+  if (std::rename(TagTempFile().data(), TagFile().data())) {
+    throw std::runtime_error("CAN NOT RENAME TAG FILE");
+  }
+}
 
 }  // namespace dtag
