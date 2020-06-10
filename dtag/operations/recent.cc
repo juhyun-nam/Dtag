@@ -4,13 +4,13 @@
 
 #include "dtag/operations/recent.h"
 
+#include <iostream>   // for ifstream, endl, basic_ios, basic_ostream
+#include <stdexcept>  // for runtime_error
+#include <string>     // for getline, operator<<, string
 #include <fstream>
-#include <iostream>
-#include <string>
 
-#include "dtag/aux_type.h"
-#include "dtag/components/recent_writer.h"
-#include "dtag/env.h"
+#include "dtag/aux_type.h"  // for AuxType
+#include "dtag/env.h"       // for Env
 
 namespace dtag {
 namespace op {

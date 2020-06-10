@@ -5,10 +5,8 @@
 #ifndef DTAG_ENV_H_
 #define DTAG_ENV_H_
 
-#include <unistd.h>
-
-#include <cstdio>
-#include <string>
+#include <cstddef>  // for size_t
+#include <string>   // for string
 
 namespace dtag {
 

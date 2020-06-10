@@ -4,12 +4,11 @@
 
 #include "dtag/operations/remove.h"
 
-#include <algorithm>
-#include <iostream>
+#include <iostream>  // for operator<<, basic_ostream, endl
 
-#include "dtag/components/tag_reader.h"
-#include "dtag/components/tag_writer.h"
-#include "dtag/env.h"
+#include "dtag/components/tag_reader.h"  // for TagReader
+#include "dtag/components/tag_writer.h"  // for TagWriter
+#include "dtag/env.h"                    // for Env
 
 namespace dtag {
 namespace op {

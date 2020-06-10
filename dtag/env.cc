@@ -4,9 +4,11 @@
 
 #include "dtag/env.h"
 
-#include <cstdio>
-#include <cstdlib>
-#include <stdexcept>
+#include <unistd.h>  // for get_current_dir_name
+
+#include <cstdio>     // for rename
+#include <cstdlib>    // for getenv
+#include <stdexcept>  // for runtime_error
 
 namespace dtag {
 const std::string Env::kTagFile =

@@ -1,12 +1,13 @@
 /// \file parser.cc
 /// \brief main's option argument parser
 /// \author juhyun-nam
-
 #include "dtag/option/parser.h"
 
-#include <cstring>
-#include <string>
+#include <cstring>  // for strcmp
+#include <string>   // for string
 
+#include "dtag/aux_type.h"        // for AuxType
+#include "dtag/operation_type.h"  // for OperationType, kHELP, kADD, kCLEAR
 namespace dtag {
 namespace option {
 

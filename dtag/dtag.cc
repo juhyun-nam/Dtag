@@ -2,22 +2,24 @@
 /// \brief dtag main
 /// \author juhyun-nam
 
-#include <array>
-#include <cassert>
-#include <iostream>
-#include <string>
+#include <array>      // for array
+#include <cassert>    // for assert
+#include <cstdlib>    // for exit, EXIT_FAILURE
+#include <iostream>   // for operator<<, endl, basic_ostream
+#include <stdexcept>  // for exception
+#include <string>     // for string
 
-#include "dtag/aux_type.h"
-#include "dtag/operation_type.h"
-#include "dtag/operations/add.h"
-#include "dtag/operations/clear.h"
-#include "dtag/operations/help.h"
-#include "dtag/operations/recent.h"
-#include "dtag/operations/remove.h"
-#include "dtag/operations/search.h"
-#include "dtag/operations/show.h"
-#include "dtag/option/argument.h"
-#include "dtag/option/parser.h"
+#include "dtag/aux_type.h"           // for AuxType
+#include "dtag/operation_type.h"     // for OperationType, kMAX
+#include "dtag/operations/add.h"     // for Add
+#include "dtag/operations/clear.h"   // for Clear
+#include "dtag/operations/help.h"    // for Help
+#include "dtag/operations/recent.h"  // for Recent
+#include "dtag/operations/remove.h"  // for Remove
+#include "dtag/operations/search.h"  // for Search
+#include "dtag/operations/show.h"    // for Show
+#include "dtag/option/argument.h"    // for Argument
+#include "dtag/option/parser.h"      // for Parse
 
 namespace {
 

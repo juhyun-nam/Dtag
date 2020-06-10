@@ -4,7 +4,8 @@
 
 #include "dtag/components/recent_writer.h"
 
-#include <fstream>
+#include <fstream>    // for ofstream, basic_ios, basic_ostream::write, ios
+#include <stdexcept>  // for runtime_error
 
 namespace dtag {
 namespace component {

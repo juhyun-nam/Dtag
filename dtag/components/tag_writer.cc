@@ -4,9 +4,8 @@
 
 #include "dtag/components/tag_writer.h"
 
-#include <fstream>
-#include <iostream>
-#include <stdexcept>
+#include <fstream>    // for ofstream, basic_ios, basic_ostream::put, basic_...
+#include <stdexcept>  // for runtime_error
 
 namespace dtag {
 namespace component {
