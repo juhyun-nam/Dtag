@@ -5,3 +5,4 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/juhyun-nam/dTAG.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/juhyun-nam/dTAG/alerts/)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/juhyun-nam/dTAG.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/juhyun-nam/dTAG/context:cpp)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/86c86bcb8c88464c826c25209f897ffa)](https://app.codacy.com/manual/juhyun-nam/dTAG?utm_source=github.com&utm_medium=referral&utm_content=juhyun-nam/dTAG&utm_campaign=Badge_Grade_Dashboard)
+[![codecov](https://codecov.io/gh/juhyun-nam/dTAG/branch/master/graph/badge.svg)](https://codecov.io/gh/juhyun-nam/dTAG)
