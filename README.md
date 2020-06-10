@@ -7,7 +7,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/86c86bcb8c88464c826c25209f897ffa)](https://app.codacy.com/manual/juhyun-nam/dTAG?utm_source=github.com&utm_medium=referral&utm_content=juhyun-nam/dTAG&utm_campaign=Badge_Grade_Dashboard)
 [![codecov](https://codecov.io/gh/juhyun-nam/dTAG/branch/master/graph/badge.svg)](https://codecov.io/gh/juhyun-nam/dTAG)
 
-원하는 디렉토리에 (권한이 없더라도) tag를 표시하고 tag를 검색, 추가, 삭제를 할 수 있는 데비안 패키지.
+원하는 디렉토리에 tag를 표시하고 tag를 검색, 추가, 삭제를 할 수 있는 데비안 패키지.
 
 ## Install
 
