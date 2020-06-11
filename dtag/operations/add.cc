@@ -9,26 +9,28 @@
 #include "dtag/components/recent_writer.h"
 #include "dtag/components/tag_reader.h"
 #include "dtag/components/tag_writer.h"
-#include "dtag/env.h"
+#include "dtag/env/enviroment.h"
 
 namespace dtag {
 namespace op {
 
-void Add(const std::string& tag, AuxType) {
-  std::string path = Env::CurrentDirectory();
-  component::TagReader reader(Env::TagFile());
-  component::TagWriter writer(Env::TagTempFile());
-  component::RecentWriter recent(Env::RecentFile());
+Add::Add(const env::Enviroment& env) : env_(env) {}
+
+void Add::Process(const std::string& target_tag) {
+  auto cur_dir = env_.CurrentDirectory();
+  component::TagReader reader(env_.TagReadFile());
+  component::TagWriter writer(env_.TagWriteFile());
+  component::RecentWriter recent(env_.RecentFile());
   bool match_found = false;
 
   while (reader.ReadLine()) {
     writer.WriteLine(reader.path());
-    if (path == reader.path()) {
-      recent.Update(path);
+    if (cur_dir == reader.path()) {
+      recent.Update(cur_dir);
       match_found = true;
-      auto pos = reader.tag().find(tag);
+      auto pos = reader.tag().find(target_tag);
       if (std::string::npos == pos) {
-        writer.WriteLine(reader.tag() + tag + " ");
+        writer.WriteLine(reader.tag() + target_tag + " ");
       }
     } else {
       writer.WriteLine(reader.tag());
@@ -36,16 +38,17 @@ void Add(const std::string& tag, AuxType) {
   }
 
   if (!match_found) {
-    writer.WriteLine(path);
-    writer.WriteLine(" " + tag + " ");
-    recent.Update(path);
+    writer.WriteLine(cur_dir);
+    writer.WriteLine(" " + target_tag + " ");
+    recent.Update(cur_dir);
   }
 
-  std::cout << "tag: " << tag << " added in path: " << path << std::endl;
+  std::cout << "tag: " << target_tag
+            << " added in current directory: " << cur_dir << std::endl;
 
   reader.Close();
   writer.Close();
-  Env::OverwriteTagFile();
+  env_.OverwriteTagFile();
 }
 
 }  // namespace op

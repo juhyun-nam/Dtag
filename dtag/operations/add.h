@@ -7,12 +7,26 @@
 
 #include <string>
 
-#include "dtag/aux_type.h"
+#include "dtag/operations/operation.h"
+namespace dtag {
+namespace env {
+class Enviroment;
+}  // namespace env
+}  // namespace dtag
 
 namespace dtag {
 namespace op {
 
-void Add(const std::string&, AuxType);
+class Add : public Operation {
+ public:
+  explicit Add(const env::Enviroment&);
+  virtual ~Add() = default;
+
+  void Process(const std::string&) override;
+
+ private:
+  const env::Enviroment& env_;
+};
 
 }  // namespace op
 }  // namespace dtag

@@ -6,7 +6,7 @@
 
 #include <stdexcept>
 
-#include "dtag/env.h"
+#include "dtag/env/constant.h"
 
 namespace dtag {
 namespace component {
@@ -15,8 +15,8 @@ TagReader::TagReader(const std::string& tag_file) : ifs_(tag_file) {
   if (!ifs_) {
     throw std::runtime_error("CAN NOT OPEN TAG FILE");
   }
-  path_buf_.reserve(Env::kMaxPathLength);
-  tag_buf_.reserve(Env::kMaxTagLength);
+  path_buf_.reserve(env::kMaxPathLength);
+  tag_buf_.reserve(env::kMaxTagLength);
 }
 TagReader::~TagReader() {
   if (ifs_.is_open()) {
@@ -28,7 +28,6 @@ void TagReader::Close() {
 }
 
 bool TagReader::ReadLine() {
-  auto path = Env::CurrentDirectory();
   bool read_success = true;
   read_success = read_success && std::getline(ifs_, path_buf_);
   read_success = read_success && std::getline(ifs_, tag_buf_);

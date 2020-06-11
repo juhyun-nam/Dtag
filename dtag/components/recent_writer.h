@@ -10,6 +10,7 @@
 
 namespace dtag {
 namespace component {
+
 class RecentWriter {
  public:
   explicit RecentWriter(const std::string& file_path);
@@ -21,6 +22,7 @@ class RecentWriter {
  private:
   std::ofstream ofs_;
 };
+
 }  // namespace component
 }  // namespace dtag
 #endif  // DTAG_COMPONENTS_RECENT_WRITER_H_

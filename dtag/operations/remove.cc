@@ -8,29 +8,31 @@
 
 #include "dtag/components/tag_reader.h"  // for TagReader
 #include "dtag/components/tag_writer.h"  // for TagWriter
-#include "dtag/env.h"                    // for Env
+#include "dtag/env/enviroment.h"                    // for env::Enviroment
 
 namespace dtag {
 namespace op {
 
-void Remove(const std::string& tag, AuxType) {
-  std::string path = Env::CurrentDirectory();
-  component::TagReader reader(Env::TagFile());
-  component::TagWriter writer(Env::TagTempFile());
+Remove::Remove(const env::Enviroment& env) : env_(env) {}
+
+void Remove::Process(const std::string& target_tag) {
+  auto cur_dir = env_.CurrentDirectory();
+  component::TagReader reader(env_.TagReadFile());
+  component::TagWriter writer(env_.TagWriteFile());
   bool match_found = false;
 
   while (reader.ReadLine()) {
-    if (path == reader.path()) {
+    if (cur_dir == reader.path()) {
       auto file_tag = reader.tag();
       /// tag 전체와 같은 경우
-      if (file_tag == " " + tag + " ") {
+      if (file_tag == " " + target_tag + " ") {
         break;
       }
       writer.WriteLine(reader.path());
-      auto pos = file_tag.find(" " + tag + " ");
+      auto pos = file_tag.find(" " + target_tag + " ");
       if (std::string::npos != pos) {
         match_found = true;
-        file_tag.erase(pos, pos + tag.length());
+        file_tag.erase(pos, pos + target_tag.length());
         writer.WriteLine(file_tag);
         break;
       }
@@ -39,14 +41,14 @@ void Remove(const std::string& tag, AuxType) {
   }
 
   if (match_found) {
-    std::cout << "tag of path: " << path << " wiped out" << std::endl;
+    std::cout << "tag: " << target_tag << " removed" << std::endl;
   } else {
-    std::cerr << "tag of path: " << path << " does not exist" << std::endl;
+    std::cerr << "tag of path: " << cur_dir << " does not exist" << std::endl;
   }
 
   reader.Close();
   writer.Close();
-  Env::OverwriteTagFile();
+  env_.OverwriteTagFile();
 }
 
 }  // namespace op

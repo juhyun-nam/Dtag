@@ -11,6 +11,7 @@ namespace dtag {
 namespace option {
 
 Argument Parse(int argc, char** argv);
+
 }  // namespace option
 }  // namespace dtag
 

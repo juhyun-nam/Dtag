@@ -2,24 +2,23 @@
 /// \brief argument
 /// \author juhyun-nam
 
-#ifndef DTAG_ARGUMENT_OPERATION_H_
-#define DTAG_ARGUMENT_OPERATION_H_
+#ifndef DTAG_OPTION_ARGUMENT_H_
+#define DTAG_OPTION_ARGUMENT_H_
 
 #include <string>
-#include <vector>
 
-#include "dtag/aux_type.h"
-#include "dtag/operation_type.h"
+#include "dtag/operations/type.h"
+#include "dtag/option/aux_type.h"
 
 namespace dtag {
 namespace option {
 
 struct Argument {
-  op::OperationType op;
+  op::Type op;
   op::AuxType aux;
   std::string input;
 };
 
 }  // namespace option
 }  // namespace dtag
-#endif  // DTAG_ARGUMENT_OPERATION_H_
+#endif  // DTAG_OPTION_ARGUMENT_H_

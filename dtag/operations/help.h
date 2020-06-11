@@ -7,12 +7,18 @@
 
 #include <string>
 
-#include "dtag/aux_type.h"
+#include "dtag/operations/operation.h"
 
 namespace dtag {
 namespace op {
 
-void Help(const std::string&, AuxType);
+class Help : public Operation {
+ public:
+  Help() = default;
+  virtual ~Help() = default;
+
+  void Process(const std::string&) override;
+};
 
 }  // namespace op
 }  // namespace dtag

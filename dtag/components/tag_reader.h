@@ -27,6 +27,7 @@ class TagReader {
   std::string path_buf_{};
   std::string tag_buf_{};
 };
+
 }  // namespace component
 }  // namespace dtag
 #endif  // DTAG_COMPONENTS_TAG_READER_H_

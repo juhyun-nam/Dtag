@@ -13,10 +13,11 @@ set(DTAG_SOURCES
     dtag/components/tag_reader.cc
     dtag/components/tag_writer.cc
     dtag/dtag.cc
-    dtag/env.cc
+    dtag/env/concrete_env.cc
     dtag/operations/add.cc
     dtag/operations/help.cc
     dtag/operations/clear.cc
+    dtag/operations/factory.cc
     dtag/operations/recent.cc
     dtag/operations/remove.cc
     dtag/operations/search.cc

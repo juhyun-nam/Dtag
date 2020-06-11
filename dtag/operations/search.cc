@@ -7,24 +7,25 @@
 #include <iostream>  // for operator<<, basic_ostream, endl
 #include <string>    // for operator<<, char_traits, string
 
-#include "dtag/aux_type.h"               // for AuxType
 #include "dtag/components/tag_reader.h"  // for TagReader
-#include "dtag/env.h"                    // for Env
+#include "dtag/env/enviroment.h"                    // for env::Enviroment
 
 namespace dtag {
 namespace op {
 
-void Search(const std::string& tag, AuxType) {
-  component::TagReader reader(Env::TagFile());
+Search::Search(const env::Enviroment& env) : env_(env) {}
+
+void Search::Process(const std::string& target_tag) {
+  component::TagReader reader(env_.TagReadFile());
   bool match_found = false;
   while (reader.ReadLine()) {
-    if (std::string::npos != reader.tag().find(tag)) {
+    if (std::string::npos != reader.tag().find(target_tag)) {
       std::cout << reader.path() << '\n' << " " << reader.tag() << std::endl;
       match_found = true;
     }
   }
   if (!match_found) {
-    std::cout << "tag (" << tag << ") NOT FOUNDED" << std::endl;
+    std::cout << "tag: " << target_tag << " NOT FOUNDED" << std::endl;
   }
 }
 

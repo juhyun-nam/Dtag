@@ -1,8 +1,8 @@
-/// \file env.h
-/// \brief enviroment
+/// \file concrete_env.cc
+/// \brief enviroment concrete class
 /// \author juhyun-nam
 
-#include "dtag/env.h"
+#include "dtag/env/concrete_env.h"
 
 #include <unistd.h>  // for get_current_dir_name
 
@@ -11,17 +11,25 @@
 #include <stdexcept>  // for runtime_error
 
 namespace dtag {
-const std::string Env::kTagFile =
+namespace env {
+
+const std::string ConcreteEnv::kTagReadFile =
     std::string(std::getenv("HOME")) + "/.local/share/dtag/tag";
-const std::string Env::kTagTempFile =
+
+const std::string ConcreteEnv::kTagWriteFile =
     std::string(std::getenv("HOME")) + "/.local/share/dtag/tag.swp";
-const std::string Env::kRecentFile =
+
+const std::string ConcreteEnv::kRecentFile =
     std::string(std::getenv("HOME")) + "/.local/share/dtag/recent";
-const std::string Env::kCurrentDir = std::string(get_current_dir_name());
-void Env::OverwriteTagFile() {
-  if (std::rename(TagTempFile().data(), TagFile().data())) {
+
+const std::string ConcreteEnv::kCurrentDir =
+    std::string(get_current_dir_name());
+
+void ConcreteEnv::OverwriteTagFile() const {
+  if (std::rename(TagWriteFile().data(), TagReadFile().data())) {
     throw std::runtime_error("CAN NOT RENAME TAG FILE");
   }
 }
 
+}  // namespace env
 }  // namespace dtag

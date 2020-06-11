@@ -9,6 +9,7 @@
 
 namespace dtag {
 namespace component {
+
 TagWriter::TagWriter(const std::string& out_file)
     : ofs_(out_file, std::ios::trunc) {
   if (!ofs_) {

@@ -11,7 +11,11 @@ namespace op {
 
 namespace {
 constexpr char kHelpText[] = "This is Help Text";
+}  // namespace
+
+void Help::Process(const std::string&) {
+  std::cout << kHelpText << std::endl;
 }
-void Help(const std::string&, AuxType) { std::cout << kHelpText << std::endl; }
+
 }  // namespace op
 }  // namespace dtag

@@ -4,18 +4,20 @@
 
 #include "dtag/operations/recent.h"
 
+#include <fstream>
 #include <iostream>   // for ifstream, endl, basic_ios, basic_ostream
 #include <stdexcept>  // for runtime_error
 #include <string>     // for getline, operator<<, string
-#include <fstream>
 
-#include "dtag/aux_type.h"  // for AuxType
-#include "dtag/env.h"       // for Env
+#include "dtag/env/enviroment.h"  // for env::Enviroment
 
 namespace dtag {
 namespace op {
-void Recent(const std::string&, AuxType) {
-  std::ifstream ifs_(Env::RecentFile());
+
+Recent::Recent(const env::Enviroment& env) : env_(env) {}
+
+void Recent::Process(const std::string&) {
+  std::ifstream ifs_(env_.RecentFile());
   if (!ifs_) {
     throw std::runtime_error("CAN NOT OPEN RECENT FILE");
   }
@@ -26,5 +28,6 @@ void Recent(const std::string&, AuxType) {
   }
   std::cout << buf << std::endl;
 }
+
 }  // namespace op
 }  // namespace dtag

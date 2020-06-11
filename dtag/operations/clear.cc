@@ -8,19 +8,21 @@
 
 #include "dtag/components/tag_reader.h"
 #include "dtag/components/tag_writer.h"
-#include "dtag/env.h"
+#include "dtag/env/enviroment.h"
 
 namespace dtag {
 namespace op {
 
-void Clear(const std::string&, AuxType) {
-  std::string path = Env::CurrentDirectory();
-  component::TagReader reader(Env::TagFile());
-  component::TagWriter writer(Env::TagTempFile());
+Clear::Clear(const env::Enviroment& env) : env_(env) {}
+
+void Clear::Process(const std::string& target_path) {
+  auto cur_dir = env_.CurrentDirectory();
+  component::TagReader reader(env_.TagReadFile());
+  component::TagWriter writer(env_.TagWriteFile());
   bool match_found = false;
 
   while (reader.ReadLine()) {
-    if (path == reader.path()) {
+    if (target_path == reader.path()) {
       match_found = true;
     } else {
       writer.WriteLine(reader.path());
@@ -29,14 +31,15 @@ void Clear(const std::string&, AuxType) {
   }
 
   if (match_found) {
-    std::cout << "tag of path: " << path << " wiped out" << std::endl;
+    std::cout << "tag of path: " << target_path << " wiped out" << std::endl;
   } else {
-    std::cerr << "tag of path: " << path << " does not exist" << std::endl;
+    std::cerr << "tag of path: " << target_path << " does not exist"
+              << std::endl;
   }
 
   reader.Close();
   writer.Close();
-  Env::OverwriteTagFile();
+  env_.OverwriteTagFile();
 }
 
 }  // namespace op

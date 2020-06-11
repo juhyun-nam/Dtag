@@ -7,12 +7,26 @@
 
 #include <string>
 
-#include "dtag/aux_type.h"
+#include "dtag/operations/operation.h"
+namespace dtag {
+namespace env {
+class Enviroment;
+}  // namespace env
+}  // namespace dtag
 
 namespace dtag {
 namespace op {
 
-void Remove(const std::string&, AuxType);
+class Remove : public Operation {
+ public:
+  explicit Remove(const env::Enviroment&);
+  virtual ~Remove() = default;
+
+  void Process(const std::string&) override;
+
+ private:
+  const env::Enviroment& env_;
+};
 
 }  // namespace op
 }  // namespace dtag
