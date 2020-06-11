@@ -2,16 +2,16 @@
 /// \brief dtag main
 /// \author juhyun-nam
 
-#include <cassert>    // for assert
+#include <cstdio>     // for perror
 #include <cstdlib>    // for exit, EXIT_FAILURE
-#include <iostream>   // for operator<<, endl, basic_ostream
+#include <memory>     // for unique_ptr
 #include <stdexcept>  // for exception
-#include <string>     // for string
 
-#include "dtag/env/concrete_env.h"
-#include "dtag/operations/factory.h"
-#include "dtag/option/argument.h"  // for Argument
-#include "dtag/option/parser.h"    // for Parse
+#include "dtag/env/concrete_env.h"      // for ConcreteEnv
+#include "dtag/operations/factory.h"    // for Factory
+#include "dtag/operations/operation.h"  // for Operation
+#include "dtag/option/argument.h"       // for Argument
+#include "dtag/option/parser.h"         // for Parse
 
 int main(int argc, char** argv) {
   try {

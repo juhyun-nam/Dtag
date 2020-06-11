@@ -4,15 +4,16 @@
 
 #include "dtag/operations/factory.h"
 
-#include <stdexcept>
+#include <stdexcept>  // for runtime_error
 
-#include "dtag/operations/add.h"
-#include "dtag/operations/clear.h"
-#include "dtag/operations/help.h"
-#include "dtag/operations/recent.h"
-#include "dtag/operations/remove.h"
-#include "dtag/operations/search.h"
-#include "dtag/operations/show.h"
+#include "dtag/operations/add.h"        // for Add
+#include "dtag/operations/clear.h"      // for Clear
+#include "dtag/operations/help.h"       // for Help
+#include "dtag/operations/operation.h"  // for Operation
+#include "dtag/operations/recent.h"     // for Recent
+#include "dtag/operations/remove.h"     // for Remove
+#include "dtag/operations/search.h"     // for Search
+#include "dtag/operations/show.h"       // for Show
 
 namespace dtag {
 namespace op {

@@ -5,14 +5,18 @@
 #ifndef DTAG_OPERATIONS_FACTORY_H_
 #define DTAG_OPERATIONS_FACTORY_H_
 
-#include <memory>
+#include <memory>  // for unique_ptr
 
-#include "dtag/operations/operation.h"
-#include "dtag/operations/type.h"
+#include "dtag/operations/type.h"  // for Type
 namespace dtag {
 namespace env {
 class Enviroment;
-}  // namespace env
+}
+}  // namespace dtag
+namespace dtag {
+namespace op {
+class Operation;
+}
 }  // namespace dtag
 
 namespace dtag {

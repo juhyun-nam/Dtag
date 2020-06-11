@@ -5,8 +5,7 @@
 #ifndef DTAG_ENV_CONCRETE_ENV_H_
 #define DTAG_ENV_CONCRETE_ENV_H_
 
-#include <cstddef>  // for size_t
-#include <string>   // for string
+#include <string>  // for string
 
 #include "dtag/env/enviroment.h"
 
