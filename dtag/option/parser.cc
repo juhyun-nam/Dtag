@@ -20,31 +20,31 @@ Argument Parse(int argc, char** argv) {
   AuxType aux{};
   std::string input{};
 
-  if (1 == argc) {
+  if (argc == 1) {
     op = op::Type::kHELP;
     return Argument{op, aux, input};
   }
   auto arg = argv[1];
-  if (0 == std::strcmp(arg, "show")) {
+  if (std::strcmp(arg, "show") == 0) {
     op = op::Type::kSHOW;
-  } else if (0 == std::strcmp(arg, "clear")) {
+  } else if (std::strcmp(arg, "clear") == 0) {
     op = op::Type::kCLEAR;
-  } else if (0 == std::strcmp(arg, "remove")) {
+  } else if (std::strcmp(arg, "remove") == 0) {
     op = op::Type::kREMOVE;
-  } else if (0 == std::strcmp(arg, "recent")) {
+  } else if (std::strcmp(arg, "recent") == 0) {
     op = op::Type::kRECENT;
-  } else if (0 == std::strcmp(arg, "add")) {
+  } else if (std::strcmp(arg, "add") == 0) {
     op = op::Type::kADD;
-  } else if (0 == std::strcmp(arg, "search")) {
+  } else if (std::strcmp(arg, "search") == 0) {
     op = op::Type::kSEARCH;
-    if (3 != argc)
+    if (argc != 3)
       op = op::Type::kHELP;
   } else {
     op = op::Type::kHELP;
     return Argument{op, aux, input};
   }
 
-  if (3 <= argc) {
+  if (argc >= 3) {
     input = argv[2];
   }
 

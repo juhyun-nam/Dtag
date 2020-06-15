@@ -29,7 +29,7 @@ void Add::Process(const std::string& target_tag) {
       recent.Update(cur_dir);
       match_found = true;
       auto pos = reader.tag().find(target_tag);
-      if (std::string::npos == pos) {
+      if (pos == std::string::npos) {
         writer.WriteLine(reader.tag() + target_tag + " ");
       }
     } else {

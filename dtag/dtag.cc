@@ -16,9 +16,9 @@
 int main(int argc, char** argv) {
   try {
     auto arg = dtag::option::Parse(argc, argv);
-
     dtag::env::ConcreteEnv env;
     dtag::op::Factory factory(env);
+
     auto op = factory.MakeOperation(arg.op);
     op->Process(arg.input);
 

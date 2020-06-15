@@ -12,7 +12,6 @@ set(DTAG_SOURCES
     dtag/components/recent_writer.cc
     dtag/components/tag_reader.cc
     dtag/components/tag_writer.cc
-    dtag/dtag.cc
     dtag/env/concrete_env.cc
     dtag/operations/add.cc
     dtag/operations/help.cc
@@ -25,7 +24,7 @@ set(DTAG_SOURCES
     dtag/option/parser.cc
     )
 
-add_executable(dtag ${DTAG_SOURCES})
+add_executable(dtag dtag/dtag.cc ${DTAG_SOURCES})
 target_include_directories(dtag PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (DTAG_BUILD_TESTING)
@@ -37,12 +36,11 @@ if (DTAG_BUILD_TESTING)
   target_include_directories(doctest INTERFACE external/doctest)
 
   set(TEST_TARGETS
-      tag_reader_test
-      tag_writer_test
+      op_test
       )
 
   foreach(target ${TEST_TARGETS})
-    add_executable(${target} dtag/tests/${target}.cc)
+    add_executable(${target} dtag/tests/${target}.cc ${DTAG_SOURCES})
     target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
     target_compile_options(${target} PRIVATE -Werror -Wall -Wextra -O0 -g --coverage)
     target_link_libraries(${target} PRIVATE doctest --coverage)

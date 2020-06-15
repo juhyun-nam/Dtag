@@ -19,7 +19,7 @@ void Search::Process(const std::string& target_tag) {
   component::TagReader reader(env_.TagReadFile());
   bool match_found = false;
   while (reader.ReadLine()) {
-    if (std::string::npos != reader.tag().find(target_tag)) {
+    if (reader.tag().find(target_tag) != std::string::npos) {
       std::cout << reader.path() << '\n' << " " << reader.tag() << std::endl;
       match_found = true;
     }
