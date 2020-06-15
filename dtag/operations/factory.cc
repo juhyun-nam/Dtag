@@ -4,6 +4,7 @@
 
 #include "dtag/operations/factory.h"
 
+#include <algorithm>
 #include <stdexcept>  // for runtime_error
 
 #include "dtag/operations/add.h"        // for Add
@@ -47,7 +48,7 @@ std::unique_ptr<Operation> Factory::MakeOperation(Type type) {
     default:
       throw std::runtime_error("SOMETHING IS WRONG");
   }
-  return ptr;
+  return std::move(ptr);
 }
 
 }  // namespace op
