@@ -5,7 +5,7 @@
 #ifndef DTAG_OPERATIONS_FACTORY_H_
 #define DTAG_OPERATIONS_FACTORY_H_
 
-#include <memory>  // for unique_ptr
+#include <memory>  // for shared_ptr
 
 #include "dtag/operations/type.h"  // for Type
 namespace dtag {
@@ -25,7 +25,7 @@ namespace op {
 class Factory {
  public:
   explicit Factory(const env::Enviroment&);
-  std::unique_ptr<Operation> MakeOperation(Type);
+  std::shared_ptr<Operation> MakeOperation(Type);
 
  private:
   const env::Enviroment& env_;

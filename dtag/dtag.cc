@@ -4,7 +4,7 @@
 
 #include <cstdio>     // for perror
 #include <cstdlib>    // for exit, EXIT_FAILURE
-#include <memory>     // for unique_ptr
+#include <memory>     // for shared_ptr
 #include <stdexcept>  // for exception
 
 #include "dtag/env/concrete_env.h"      // for ConcreteEnv
