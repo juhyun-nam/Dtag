@@ -4,7 +4,7 @@
 
 #include "dtag/operations/factory.h"
 
-#include <algorithm>
+#include <memory>
 #include <stdexcept>  // for runtime_error
 
 #include "dtag/operations/add.h"        // for Add
